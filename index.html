@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header></header>
     <main>
+        
+        <h1>All season flower</h1>
+        <div class="sun"></div>
         <!-- Flower 1 -->
         <section>
             <div></div> <!-- 1 -->
@@ -650,22 +652,42 @@
 
     </main>
     <footer> 
+
         <fieldset>
-            <legend>Select a maintenance drone:</legend>
+            <legend>Select a flower:</legend>
 
             <div>
-                <input type="radio" id="flower1" name="drone" value="blue" checked />
+                <input type="radio" id="flower1" name="flower" checked>
                 <label for="flower1">Blue Flower</label>
             </div>
 
             <div>
-                <input type="radio" id="flower2" name="drone" value="red" />
+                <input type="radio" id="flower2" name="flower">
                 <label for="flower2">Red Flower</label>
             </div>
 
             <div>
-                <input type="radio" id="flower3" name="drone" value="yellow" />
+                <input type="radio" id="flower3" name="flower">
                 <label for="flower3">Yellow Flower</label>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Select a time:</legend>
+
+            <div>
+                <input type="radio" id="day" name="time" checked>
+                <label for="day">Day</label>
+            </div>
+
+            <div>
+                <input type="radio" id="night" name="time">
+                <label for="night">Night</label>
+            </div>
+
+            <div>
+                <input type="radio" id="rainy" name="time">
+                <label for="rainy">Rainy</label>
             </div>
         </fieldset>
     </footer>

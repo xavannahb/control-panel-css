@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'minecraft-font';
+    src: url('../fonts/minecraft.ttf'); 
+}
+
 :root {
     /* Background colours */
     --background-color: #a4d0ed;
@@ -22,29 +27,58 @@
     --f3-light-orange: #F5CF86;
     --f3-orange: #F2BE68;
 
-    --f3-light-green: #6FBA73;
+    --f3-light-green: #469d32;
     --f3-green: #58AE60;
-    --f3-dark-green: #4A9A51;
+    --f3-dark-green: #32711d;
 
 }   
 
 body {
-    background-color: var(--background-color);
     margin: 0;
     padding: 0;
+    font-family: 'minecraft-font';
+    letter-spacing: 0.05rem;
 }
 
+/* Header */
+
+/* header {
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+} */
+
+h1 {
+    margin: 0 auto;
+    width: max-content;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 0.5em 0.5em;
+    text-align: center;
+    color: #fff;
+}
+
+/* Main sections */
 main {
     background-color: var(--background-color);
     width: 100vw;
-    height: 70vh;
     position: relative;
+    padding-top: 1rem;
+}
+
+main .sun {
+    clip-path: circle(30% at 85% 15%);
+    background-color: purple;
+    width: 30px;
+    height: 30px;
 }
 
 main section:nth-of-type(1), section:nth-of-type(2), section:nth-of-type(3) {
     width: 420px;
     margin: 0 auto;
-    display: grid;
+    padding: 3rem 0 0 0;
+    display: none;
     grid-template-columns: repeat(14, 30px);
     grid-template-rows: repeat(14, 30px);
 }
@@ -128,61 +162,61 @@ main section:nth-of-type(1) div:nth-of-type(108) {
 /* Flower 2 */
 
 /* Light red */
-main section:nth-of-type(2) div:nth-of-type(35),
 main section:nth-of-type(2) div:nth-of-type(49),
-main section:nth-of-type(2) div:nth-of-type(50),
-main section:nth-of-type(2) div:nth-of-type(52),
-main section:nth-of-type(2) div:nth-of-type(60),
-main section:nth-of-type(2) div:nth-of-type(61),
+main section:nth-of-type(2) div:nth-of-type(63),
+main section:nth-of-type(2) div:nth-of-type(64),
+main section:nth-of-type(2) div:nth-of-type(66),
 main section:nth-of-type(2) div:nth-of-type(74),
-main section:nth-of-type(2) div:nth-of-type(75) {
+main section:nth-of-type(2) div:nth-of-type(75),
+main section:nth-of-type(2) div:nth-of-type(88),
+main section:nth-of-type(2) div:nth-of-type(89) {
     background-color: var(--f2-light-red);
 }
 
 /* Red */
-main section:nth-of-type(2) div:nth-of-type(36),
-main section:nth-of-type(2) div:nth-of-type(37),
-main section:nth-of-type(2) div:nth-of-type(47),
+main section:nth-of-type(2) div:nth-of-type(50),
 main section:nth-of-type(2) div:nth-of-type(51),
-main section:nth-of-type(2) div:nth-of-type(64),
-main section:nth-of-type(2) div:nth-of-type(66),
-main section:nth-of-type(2) div:nth-of-type(76) {
+main section:nth-of-type(2) div:nth-of-type(61),
+main section:nth-of-type(2) div:nth-of-type(65),
+main section:nth-of-type(2) div:nth-of-type(78),
+main section:nth-of-type(2) div:nth-of-type(80),
+main section:nth-of-type(2) div:nth-of-type(90) {
     background-color: var(--f2-red);
 }
 
 /* Dark red */
-main section:nth-of-type(2) div:nth-of-type(48),
 main section:nth-of-type(2) div:nth-of-type(62),
-main section:nth-of-type(2) div:nth-of-type(63),
-main section:nth-of-type(2) div:nth-of-type(65),
+main section:nth-of-type(2) div:nth-of-type(76),
 main section:nth-of-type(2) div:nth-of-type(77),
-main section:nth-of-type(2) div:nth-of-type(78),
-main section:nth-of-type(2) div:nth-of-type(89) {
+main section:nth-of-type(2) div:nth-of-type(79),
+main section:nth-of-type(2) div:nth-of-type(91),
+main section:nth-of-type(2) div:nth-of-type(92),
+main section:nth-of-type(2) div:nth-of-type(103) {
     background-color: var(--f2-dark-red);
 }
 
 /* Light green */
-main section:nth-of-type(2) div:nth-of-type(91),
 main section:nth-of-type(2) div:nth-of-type(105),
 main section:nth-of-type(2) div:nth-of-type(119),
 main section:nth-of-type(2) div:nth-of-type(133),
-main section:nth-of-type(2) div:nth-of-type(145) {
+main section:nth-of-type(2) div:nth-of-type(147),
+main section:nth-of-type(2) div:nth-of-type(159) {
     background-color: var(--f2-light-green);
 }
 
 /* Dark green */
-main section:nth-of-type(2) div:nth-of-type(90),
 main section:nth-of-type(2) div:nth-of-type(104),
-main section:nth-of-type(2) div:nth-of-type(144),
-main section:nth-of-type(2) div:nth-of-type(147),
-main section:nth-of-type(2) div:nth-of-type(149),
-main section:nth-of-type(2) div:nth-of-type(150),
-main section:nth-of-type(2) div:nth-of-type(159),
+main section:nth-of-type(2) div:nth-of-type(118),
+main section:nth-of-type(2) div:nth-of-type(158),
 main section:nth-of-type(2) div:nth-of-type(161),
-main section:nth-of-type(2) div:nth-of-type(162),
-main section:nth-of-type(2) div:nth-of-type(174),
+main section:nth-of-type(2) div:nth-of-type(163),
+main section:nth-of-type(2) div:nth-of-type(164),
+main section:nth-of-type(2) div:nth-of-type(173),
 main section:nth-of-type(2) div:nth-of-type(175),
-main section:nth-of-type(2) div:nth-of-type(176) {
+main section:nth-of-type(2) div:nth-of-type(176),
+main section:nth-of-type(2) div:nth-of-type(188),
+main section:nth-of-type(2) div:nth-of-type(189),
+main section:nth-of-type(2) div:nth-of-type(190) {
     background-color: var(--f2-dark-green);
 }
 
@@ -248,11 +282,50 @@ main section:nth-of-type(3) div:nth-of-type(190) {
 }
 
 
+/* Fieldset flowers */
+body:has(#flower1:checked) section:nth-of-type(1) {
+    display: grid;
+}
+
+body:has(#flower2:checked) section:nth-of-type(2) {
+    display: grid;
+}
+
+body:has(#flower3:checked) section:nth-of-type(3) {
+    display: grid;
+}
+
+/* Fieldset days */
+body:has(#night:checked) header, body:has(#night:checked) main {
+    background-color: #102061;
+}
+
+body:has(#rainy:checked) header, body:has(#rainy:checked) main {
+    background-color: #70727b;
+}
 
 
+/* @keyframes resize {
+    from {
+    transform: translate(-100px);
+  }
+
+  to {
+    transform: translate(100px);
+  }
+} */
+
+/* footer */
 
 footer {
     background-color: var(--control-panel-color);
-    width: 100vw;
     height: 30vh;
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    border: 2px solid #000;
+    margin: auto;
+    padding: 1rem;
 }
