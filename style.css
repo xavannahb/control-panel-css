@@ -61,20 +61,41 @@ h1 {
 
 /* Main sections */
 main {
-    background-color: var(--background-color);
+    background: linear-gradient(to top, #bde0fe, #8dcaff);
     width: 100vw;
     position: relative;
     padding-top: 1rem;
+    overflow: hidden;
 }
 
-main .sun {
-    clip-path: circle(30% at 85% 15%);
-    background-color: purple;
-    width: 30px;
-    height: 30px;
+/* Animated background layers */
+main::before,
+main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* Beetje met chatgpt gemaakt prompt 'hoe maak in achtergrond hiervoor als ik geen classes mag maken?' */
 }
 
-main section:nth-of-type(1), section:nth-of-type(2), section:nth-of-type(3) {
+body:has(#day:checked) main::before {
+    background:
+        radial-gradient(circle at 10% 83%, #fff4b5 0 60px, transparent 61px);
+    animation: riseUp 5s ease-in-out 1 alternate forwards;
+}
+
+body:has(#day:checked) main::after {
+    background: linear-gradient(to top, #fff4b5, transparent 40%);
+}
+
+/* Gives the content layers */
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
+main section:nth-of-type(1),
+main section:nth-of-type(2),
+main section:nth-of-type(3) {
     width: 420px;
     margin: 0 auto;
     padding: 3rem 0 0 0;
@@ -150,7 +171,7 @@ main section:nth-of-type(1) div:nth-of-type(32),
 main section:nth-of-type(1) div:nth-of-type(34), 
 main section:nth-of-type(1) div:nth-of-type(40),
 main section:nth-of-type(1) div:nth-of-type(45), 
-main section:nth-of-type(1) div:nth-of-type(46)
+main section:nth-of-type(1) div:nth-of-type(46),
 main section:nth-of-type(1) div:nth-of-type(66),
 main section:nth-of-type(1) div:nth-of-type(72),
 main section:nth-of-type(1) div:nth-of-type(107),
@@ -296,27 +317,51 @@ body:has(#flower3:checked) section:nth-of-type(3) {
 }
 
 /* Fieldset days */
-body:has(#night:checked) header, body:has(#night:checked) main {
-    background-color: #102061;
+
+/* Night */
+body:has(#night:checked) main {
+    background: linear-gradient(to top, #102061, #1b2f7a);
 }
 
-body:has(#rainy:checked) header, body:has(#rainy:checked) main {
-    background-color: #70727b;
+body:has(#night:checked) main::before {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 35%, rgba(255,255,255,0.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 55% 15%, rgba(255,255,255,0.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,0.8) 0 2px, transparent 3px);
+    animation: floatBg 8s ease-in-out infinite alternate;
 }
 
+body:has(#night:checked) main::after {
+    background: 
+        linear-gradient(to top, rgba(0, 0, 0, 0.25), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255) 0 60px, transparent 61px);
+    animation: pulseBg 4s ease-in-out infinite;
+}
 
-/* @keyframes resize {
-    from {
-    transform: translate(-100px);
-  }
+/* Rainy */
 
-  to {
-    transform: translate(100px);
-  }
-} */
+body:has(#rainy:checked) main {
+    background: linear-gradient(to top, #36373e, #a3a6b1);
+}
+
+body:has(#rainy:checked) main::before {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 35%, rgba(255,255,255,0.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 55% 15%, rgba(255,255,255,0.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,0.8) 0 2px, transparent 3px);
+    animation: floatBg 8s ease-in-out infinite alternate;
+}
+
+body:has(#rainy:checked) main::after{
+    background: linear-gradient(to top, #5596b6, transparent 40%);
+}
+
 
 /* footer */
-
 footer {
     background-color: var(--control-panel-color);
     height: 30vh;
@@ -324,8 +369,93 @@ footer {
     justify-content: center;
 }
 
-fieldset {
+footer fieldset {
     border: 2px solid #000;
     margin: auto;
     padding: 1rem;
+}
+
+/* Hide rainbow button */
+footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display : none; /* makes sure the rainbow button doenst show */
+}
+
+body:has(#rainy:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display: block;
+}
+
+body:has(#rainbow:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display: block;
+}
+
+body:has(#night:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1),
+body:has(#day:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display: none;
+}
+
+
+/* Rainbow  */
+body:has(#rainbow:checked) main {
+    background: linear-gradient(to top, #87ceeb, #eaf8ff);
+}
+
+body:has(#rainbow:checked) main::before{
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+
+    width: 900px;
+    height: 450px;
+
+    border-radius: 450px 450px 0 0;
+
+    background:
+        radial-gradient(circle at 50% 100%,
+            transparent 0 170px,
+            rgba(255,0,0,0.2) 170px 195px,
+            rgba(255,127,0,0.2) 195px 220px,
+            rgba(255,255,0,0.2) 220px 245px,
+            rgba(0,255,0,0.2) 245px 270px,
+            rgba(0,0,255,0.2) 270px 295px,
+            rgba(75,0,130,0.2) 295px 320px,
+            rgba(143,0,255,0.2) 320px 345px,
+            transparent 345px);
+
+    pointer-events: none;
+}
+
+/* animations */
+@keyframes riseUp {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    /* 80% {
+    transform: translateY(-400px) translateX(900px);
+    } */
+    100% {
+        transform: translateY(-350px) translateX(1100px);
+    }
+}
+
+@keyframes pulseBg {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+@keyframes floatBg {
+    from {
+        transform: translateY(0) translateX(0);
+    }
+    to {
+        transform: translateY(-10px) translateX(8px);
+    }
 }
