@@ -1,0 +1,522 @@
+@font-face {
+    font-family: 'minecraft-font';
+    src: url('../fonts/minecraft.ttf'); 
+}
+
+:root {
+    /* Background colours */
+    --background-color: #a4d0ed;
+    --control-panel-color: #41a76b;
+
+    /* Flower 1 */
+    --f1-light-green: #469d32;
+    --f1-dark-green: #32711d;
+    --f1-light-blue: #56b8f8;
+    --f1-dark-blue: #319bd4;
+
+    /* Flower 2 */
+    --f2-light-green: #469d32;
+    --f2-dark-green: #32711d;
+    --f2-light-red: #FF2B2B;
+    --f2-red: #E3343A;
+    --f2-dark-red: #9E1B1F;
+
+    /* Flower 3 */
+    --f3-light-yellow: #F6E27A;
+    --f3-yellow: #E8D474;
+    --f3-light-orange: #F5CF86;
+    --f3-orange: #F2BE68;
+
+    --f3-light-green: #469d32;
+    --f3-green: #58AE60;
+    --f3-dark-green: #32711d;
+
+}   
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'minecraft-font';
+    letter-spacing: 0.05rem;
+}
+
+/* Header */
+
+/* header {
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+} */
+
+h1 {
+    margin: 0 auto;
+    width: max-content;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 0.5em 0.5em;
+    text-align: center;
+    color: #fff;
+}
+
+/* Main sections */
+main {
+    background: linear-gradient(to top, #bde0fe, #8dcaff);
+    width: 100vw;
+    height: 535px;
+    position: relative;
+    padding-top: 1rem;
+    overflow: hidden;
+}
+
+/* Animated background layers */
+main::before,
+main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* Beetje met chatgpt gemaakt prompt 'hoe maak in achtergrond hiervoor als ik geen classes mag maken?' */
+}
+
+body:has(#day:checked) main::before {
+    background:
+        radial-gradient(circle at 10% 83%, #fff4b5 0 60px, transparent 61px);
+    animation: riseUp 5s ease-in-out 1 alternate forwards;
+}
+
+body:has(#day:checked) main::after {
+    background: linear-gradient(to top, #fff4b5, transparent 40%);
+}
+
+/* Gives the content layers */
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
+main section:nth-of-type(1),
+main section:nth-of-type(2),
+main section:nth-of-type(3) {
+    width: 420px;
+    margin: 0 auto;
+    padding: 3rem 0 0 0;
+    display: none;
+    grid-template-columns: repeat(14, 30px);
+    grid-template-rows: repeat(14, 30px);
+}
+
+
+/* Flower 1 */
+
+/* Light green */
+main section:nth-of-type(1) div:nth-of-type(39),
+main section:nth-of-type(1) div:nth-of-type(60),
+main section:nth-of-type(1) div:nth-of-type(61),
+main section:nth-of-type(1) div:nth-of-type(65),
+main section:nth-of-type(1) div:nth-of-type(120),
+main section:nth-of-type(1) div:nth-of-type(163) {
+    background-color: var(--f1-light-green);
+}
+
+/* Dark green */
+main section:nth-of-type(1) div:nth-of-type(26),
+main section:nth-of-type(1) div:nth-of-type(62),
+main section:nth-of-type(1) div:nth-of-type(74),
+main section:nth-of-type(1) div:nth-of-type(77),
+main section:nth-of-type(1) div:nth-of-type(79),
+main section:nth-of-type(1) div:nth-of-type(92),
+main section:nth-of-type(1) div:nth-of-type(106),
+main section:nth-of-type(1) div:nth-of-type(134),
+main section:nth-of-type(1) div:nth-of-type(135),
+main section:nth-of-type(1) div:nth-of-type(149),
+main section:nth-of-type(1) div:nth-of-type(177),
+main section:nth-of-type(1) div:nth-of-type(190),
+main section:nth-of-type(1) div:nth-of-type(191) {
+    background-color: var(--f1-dark-green);
+}
+
+/* Light blue */
+main section:nth-of-type(1) div:nth-of-type(27), 
+main section:nth-of-type(1) div:nth-of-type(31), 
+main section:nth-of-type(1) div:nth-of-type(35), 
+main section:nth-of-type(1) div:nth-of-type(41), 
+main section:nth-of-type(1) div:nth-of-type(48), 
+main section:nth-of-type(1) div:nth-of-type(49), 
+main section:nth-of-type(1) div:nth-of-type(53){
+    background-color: var(--f1-light-blue);
+}
+
+/* Dark blue */
+main section:nth-of-type(1) div:nth-of-type(27),
+main section:nth-of-type(1) div:nth-of-type(31),
+main section:nth-of-type(1) div:nth-of-type(32),
+main section:nth-of-type(1) div:nth-of-type(35),
+main section:nth-of-type(1) div:nth-of-type(41),
+main section:nth-of-type(1) div:nth-of-type(48),
+main section:nth-of-type(1) div:nth-of-type(49),
+main section:nth-of-type(1) div:nth-of-type(53),
+main section:nth-of-type(1) div:nth-of-type(67),
+main section:nth-of-type(1) div:nth-of-type(68),
+main section:nth-of-type(1) div:nth-of-type(73),
+main section:nth-of-type(1) div:nth-of-type(81),
+main section:nth-of-type(1) div:nth-of-type(86),
+main section:nth-of-type(1) div:nth-of-type(87),
+main section:nth-of-type(1) div:nth-of-type(93),
+main section:nth-of-type(1) div:nth-of-type(94) {
+    background-color: var(--f1-light-blue);
+}
+
+main section:nth-of-type(1) div:nth-of-type(13), 
+main section:nth-of-type(1) div:nth-of-type(28), 
+main section:nth-of-type(1) div:nth-of-type(32), 
+main section:nth-of-type(1) div:nth-of-type(34), 
+main section:nth-of-type(1) div:nth-of-type(40),
+main section:nth-of-type(1) div:nth-of-type(45), 
+main section:nth-of-type(1) div:nth-of-type(46),
+main section:nth-of-type(1) div:nth-of-type(66),
+main section:nth-of-type(1) div:nth-of-type(72),
+main section:nth-of-type(1) div:nth-of-type(107),
+main section:nth-of-type(1) div:nth-of-type(108) {
+    background-color: var(--f1-dark-blue);
+}
+
+
+/* Flower 2 */
+
+/* Light red */
+main section:nth-of-type(2) div:nth-of-type(49),
+main section:nth-of-type(2) div:nth-of-type(63),
+main section:nth-of-type(2) div:nth-of-type(64),
+main section:nth-of-type(2) div:nth-of-type(66),
+main section:nth-of-type(2) div:nth-of-type(74),
+main section:nth-of-type(2) div:nth-of-type(75),
+main section:nth-of-type(2) div:nth-of-type(88),
+main section:nth-of-type(2) div:nth-of-type(89) {
+    background-color: var(--f2-light-red);
+}
+
+/* Red */
+main section:nth-of-type(2) div:nth-of-type(50),
+main section:nth-of-type(2) div:nth-of-type(51),
+main section:nth-of-type(2) div:nth-of-type(61),
+main section:nth-of-type(2) div:nth-of-type(65),
+main section:nth-of-type(2) div:nth-of-type(78),
+main section:nth-of-type(2) div:nth-of-type(80),
+main section:nth-of-type(2) div:nth-of-type(90) {
+    background-color: var(--f2-red);
+}
+
+/* Dark red */
+main section:nth-of-type(2) div:nth-of-type(62),
+main section:nth-of-type(2) div:nth-of-type(76),
+main section:nth-of-type(2) div:nth-of-type(77),
+main section:nth-of-type(2) div:nth-of-type(79),
+main section:nth-of-type(2) div:nth-of-type(91),
+main section:nth-of-type(2) div:nth-of-type(92),
+main section:nth-of-type(2) div:nth-of-type(103) {
+    background-color: var(--f2-dark-red);
+}
+
+/* Light green */
+main section:nth-of-type(2) div:nth-of-type(105),
+main section:nth-of-type(2) div:nth-of-type(119),
+main section:nth-of-type(2) div:nth-of-type(133),
+main section:nth-of-type(2) div:nth-of-type(147),
+main section:nth-of-type(2) div:nth-of-type(159) {
+    background-color: var(--f2-light-green);
+}
+
+/* Dark green */
+main section:nth-of-type(2) div:nth-of-type(104),
+main section:nth-of-type(2) div:nth-of-type(118),
+main section:nth-of-type(2) div:nth-of-type(158),
+main section:nth-of-type(2) div:nth-of-type(161),
+main section:nth-of-type(2) div:nth-of-type(163),
+main section:nth-of-type(2) div:nth-of-type(164),
+main section:nth-of-type(2) div:nth-of-type(173),
+main section:nth-of-type(2) div:nth-of-type(175),
+main section:nth-of-type(2) div:nth-of-type(176),
+main section:nth-of-type(2) div:nth-of-type(188),
+main section:nth-of-type(2) div:nth-of-type(189),
+main section:nth-of-type(2) div:nth-of-type(190) {
+    background-color: var(--f2-dark-green);
+}
+
+/* Flower 3 */
+
+/* Light yellow */
+main section:nth-of-type(3) div:nth-of-type(90),
+main section:nth-of-type(3) div:nth-of-type(92),
+main section:nth-of-type(3) div:nth-of-type(106),
+main section:nth-of-type(3) div:nth-of-type(117),
+main section:nth-of-type(3) div:nth-of-type(118) {
+    background-color: var(--f3-light-yellow);
+}
+
+/* Yellow */
+main section:nth-of-type(3) div:nth-of-type(94),
+main section:nth-of-type(3) div:nth-of-type(120) {
+    background-color: var(--f3-yellow);
+}
+
+/* Light orange */
+main section:nth-of-type(3) div:nth-of-type(89),
+main section:nth-of-type(3) div:nth-of-type(93),
+main section:nth-of-type(3) div:nth-of-type(104),
+main section:nth-of-type(3) div:nth-of-type(105),
+main section:nth-of-type(3) div:nth-of-type(119),
+main section:nth-of-type(3) div:nth-of-type(122) {
+    background-color: var(--f3-light-orange);
+}
+
+/* Orange */
+main section:nth-of-type(3) div:nth-of-type(107),
+main section:nth-of-type(3) div:nth-of-type(121) {
+    background-color: var(--f3-orange);
+}
+
+/* Light green */
+main section:nth-of-type(3) div:nth-of-type(133),
+main section:nth-of-type(3) div:nth-of-type(134),
+main section:nth-of-type(3) div:nth-of-type(147),
+main section:nth-of-type(3) div:nth-of-type(161),
+main section:nth-of-type(3) div:nth-of-type(175),
+main section:nth-of-type(3) div:nth-of-type(189) {
+    background-color: var(--f3-light-green);
+}
+
+/* Green */
+main section:nth-of-type(3) div:nth-of-type(149),
+main section:nth-of-type(3) div:nth-of-type(159),
+main section:nth-of-type(3) div:nth-of-type(160)  {
+    background-color: var(--f3-green);
+}
+
+/* Dark green */
+main section:nth-of-type(3) div:nth-of-type(148),
+main section:nth-of-type(3) div:nth-of-type(150),
+main section:nth-of-type(3) div:nth-of-type(162),
+main section:nth-of-type(3) div:nth-of-type(163),
+main section:nth-of-type(3) div:nth-of-type(174),
+main section:nth-of-type(3) div:nth-of-type(176),
+main section:nth-of-type(3) div:nth-of-type(190) {
+    background-color: var(--f3-dark-green);
+}
+
+/* Animation flower */
+
+main section div {
+    opacity: 0;
+    animation: blockAppear 0.2s steps(1) forwards;
+}
+
+main section div:nth-child(n+183):nth-child(-n+196) { animation-delay: 0s; } 
+main section div:nth-child(n+169):nth-child(-n+182) { animation-delay: 0.5s; }
+main section div:nth-child(n+155):nth-child(-n+168) { animation-delay: 1s; }  
+main section div:nth-child(n+141):nth-child(-n+154) { animation-delay: 1.5s; }
+main section div:nth-child(n+127):nth-child(-n+140) { animation-delay: 2s; }
+main section div:nth-child(n+113):nth-child(-n+126) { animation-delay: 2.5s; }
+main section div:nth-child(n+99):nth-child(-n+112) { animation-delay: 3s; }
+main section div:nth-child(n+85):nth-child(-n+98) { animation-delay: 3.5s; }
+main section div:nth-child(n+71):nth-child(-n+84) { animation-delay: 4s; }
+main section div:nth-child(n+57):nth-child(-n+70) { animation-delay: 4.5s; }
+main section div:nth-child(n+43):nth-child(-n+56) { animation-delay: 5s; }
+main section div:nth-child(n+29):nth-child(-n+42) { animation-delay: 5.5s; }
+main section div:nth-child(n+15):nth-child(-n+28) { animation-delay: 6s; }
+main section div:nth-child(-n+14) { animation-delay: 6.5s; }
+
+/*
+main section div:nth-child(-n+14) { animation-delay: 0s; }
+main section div:nth-child(n+15):nth-child(-n+28) { animation-delay: 0.5s; }
+main section div:nth-child(n+29):nth-child(-n+42) { animation-delay: 1s; }
+main section div:nth-child(n+43):nth-child(-n+56) { animation-delay: 1.5s; }
+main section div:nth-child(n+57):nth-child(-n+70) { animation-delay: 2s; }
+main section div:nth-child(n+71):nth-child(-n+84) { animation-delay: 2.5s; }
+main section div:nth-child(n+85):nth-child(-n+98) { animation-delay: 3s; }
+main section div:nth-child(n+99):nth-child(-n+112) { animation-delay: 3.5s; }
+main section div:nth-child(n+113):nth-child(-n+126) { animation-delay: 4s; }
+main section div:nth-child(n+127):nth-child(-n+140) { animation-delay: 4.5s; }
+main section div:nth-child(n+141):nth-child(-n+154) { animation-delay: 5s; }
+main section div:nth-child(n+155):nth-child(-n+168) { animation-delay: 5.5s; }  
+main section div:nth-child(n+169):nth-child(-n+182) { animation-delay: 6s; }
+main section div:nth-child(n+183):nth-child(-n+196) { animation-delay: 6.5s; }
+*/
+
+@keyframes blockAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* Fieldset flowers */
+body:has(#flower1:checked) section:nth-of-type(1) {
+    display: grid;
+}
+
+body:has(#flower2:checked) section:nth-of-type(2) {
+    display: grid;
+}
+
+body:has(#flower3:checked) section:nth-of-type(3) {
+    display: grid;
+}
+
+/* Fieldset days */
+
+/* Night */
+body:has(#night:checked) main {
+    background: linear-gradient(to top, #102061, #1b2f7a);
+}
+
+body:has(#night:checked) main::before {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 35%, rgba(255,255,255,0.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 55% 15%, rgba(255,255,255,0.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,0.8) 0 2px, transparent 3px);
+    animation: floatBg 8s ease-in-out infinite alternate;
+}
+
+body:has(#night:checked) main::after {
+    background: 
+        linear-gradient(to top, rgba(0, 0, 0, 0.25), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255) 0 60px, transparent 61px);
+    animation: pulseBg 4s ease-in-out infinite;
+}
+
+/* Rainy */
+
+body:has(#rainy:checked) main {
+    background: linear-gradient(to top, #36373e, #a3a6b1);
+}
+
+body:has(#rainy:checked) main::before {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 35%, rgba(255,255,255,0.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 55% 15%, rgba(255,255,255,0.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,0.8) 0 2px, transparent 3px);
+    animation: floatBg 8s ease-in-out infinite alternate;
+}
+
+body:has(#rainy:checked) main::after{
+    background: linear-gradient(to top, #5596b6, transparent 40%);
+}
+
+
+/* footer */
+footer {
+    background-color: var(--control-panel-color);
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer fieldset:nth-of-type(1) {
+    margin-top: 1rem;
+    border: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer fieldset:nth-of-type(1) legend{
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 0.5em 0.5em;
+    text-align: center;
+    color: #fff;
+}
+
+footer fieldset:nth-of-type(2) {
+    border: 2px solid #000;
+    margin: auto;
+    padding: 1rem;
+}
+
+
+
+/* Hide rainbow button */
+footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display : none; /* makes sure the rainbow button doenst show */
+}
+
+body:has(#rainy:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display: block;
+}
+
+body:has(#rainbow:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display: block;
+}
+
+body:has(#night:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1),
+body:has(#day:checked) footer fieldset:nth-of-type(2) div:nth-last-of-type(1) {
+    display: none;
+}
+
+
+/* Rainbow  */
+body:has(#rainbow:checked) main {
+    background: linear-gradient(to top, #87ceeb, #eaf8ff);
+}
+
+body:has(#rainbow:checked) main::before{
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+
+    width: 900px;
+    height: 450px;
+
+    border-radius: 450px 450px 0 0;
+
+    background:
+        radial-gradient(circle at 50% 100%,
+            transparent 0 170px,
+            rgba(255,0,0,0.2) 170px 195px,
+            rgba(255,127,0,0.2) 195px 220px,
+            rgba(255,255,0,0.2) 220px 245px,
+            rgba(0,255,0,0.2) 245px 270px,
+            rgba(0,0,255,0.2) 270px 295px,
+            rgba(75,0,130,0.2) 295px 320px,
+            rgba(143,0,255,0.2) 320px 345px,
+            transparent 345px);
+
+    pointer-events: none;
+}
+
+/* animations */
+@keyframes riseUp {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    /* 80% {
+    transform: translateY(-400px) translateX(900px);
+    } */
+    100% {
+        transform: translateY(-350px) translateX(1100px);
+    }
+}
+
+@keyframes pulseBg {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+@keyframes floatBg {
+    from {
+        transform: translateY(0) translateX(0);
+    }
+    to {
+        transform: translateY(-10px) translateX(8px);
+    }
+}
