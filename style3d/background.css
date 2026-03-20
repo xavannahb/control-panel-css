@@ -9,8 +9,8 @@
 }
 
 body {
+    margin: 0;
     background-color: var(--background-color);
-    background-image: linear-gradient(to top, #fff4b5, transparent 40%);
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -33,7 +33,6 @@ footer {
     background: #4c8c3f;
     border-top: 6px solid #2f5f28;
 }
-
 
 fieldset {
     display: flex;
