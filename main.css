@@ -8,6 +8,18 @@
     --background-color: #a4d0ed;
     /* achtergrond footer */
     --background-color-footer: #41a76b;
+    --border-color-green-footer: #2f5f28;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        --background-color: #1d608c;
+    }
+
+    footer {
+        --background-color-footer: #2c731e;
+        --border-color-green-footer: #194713;
+    }
 }
 
 body {
@@ -497,17 +509,17 @@ side {
 /* Footer */
 
 footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
     padding: 2rem;
-    background: #4c8c3f;
-    border-top: 6px solid #2f5f28; 
+    background: var(--background-color-footer);
+    border-top: 6px solid var(--border-color-green-footer); 
     /* kleuren footer: Chatgpt prompt 'Geef me kleuren van een minecraft blokje' */
 }
 
 fieldset {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 1em;
     background: #8b5a2b;
     border: 4px solid #5a3a1b;
 
@@ -518,11 +530,19 @@ fieldset {
     color: white;
 }
 
+fieldset:nth-of-type(3) {
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 10px;
+    padding: 1rem;
+}
+
 legend {
     font-family: 'minecraft-font';
     padding: 0.4rem 1rem;
-    background: #4c8c3f;
-    border: 4px solid #2f5f28;
+    background: var(--background-color-footer);
+    border: 4px solid var(--border-color-green-footer);
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 4px 4px 0 #1a1a1a;
@@ -565,6 +585,22 @@ input[type="radio"]:checked + .pijl {
         inset -2px -2px 0 #3c7a30;
 }
 
+/* plaatsing pijltjes */
+label:nth-of-type(1) {
+    grid-area: 2/1;
+}
+label:nth-of-type(2) {
+    grid-area: 1/2;
+}
+label:nth-of-type(3) {
+    grid-area: 2/2;
+}
+label:nth-of-type(4) {
+    grid-area: 3/2;
+}
+label:nth-of-type(5) {
+    grid-area: 2/3;
+}
 /* transform pijltjes */
 label:hover .pijl {
     transform: scale(1.1);
