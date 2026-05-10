@@ -32,14 +32,12 @@ Op basis van de feedback besloot ik het ontwerp om te zetten naar 3D. Samen met 
 
 Daarnaast ben ik toen gaan kijken hoe ik hem nog meer 3d kan laten lijken. Hier heb ik de met behulp van Sanne en berekening gemaakt om ervoor te zorgen dat de kubussen naar voren en naar achter geplaatst konden worden. 
 
-    /*     translate:0 0 calc(var(--s) * -1); zorgt ervoor dat de bloem naar achter gaat */
-    /*     translate:0 0 var(--s); zorgt ervoor dat de bloem naar voren gaat */
+/*     translate:0 0 calc(var(--s) * -1); zorgt ervoor dat de bloem naar achter gaat */
+/*     translate:0 0 var(--s); zorgt ervoor dat de bloem naar voren gaat */
 
 Sanne heeft me ook geholpen met het veranderen van de rotatie van de bloem. Door gewoon de hele section op de x of y as te draaien kan je makkelijk een rotatie geven aan je ontwerp. Ik dacht eigenlijk dat je hierbij kubus voor kubus zou moeten verschuiven... 
 
-html:has([value="links"]:checked) & {
-        rotate:y 90deg;
-}
+/* html:has([value="links"]:checked) & { rotate:y 90deg; } */
 
 **Wat heb ik geleerd?**
 
@@ -67,19 +65,21 @@ Ik ben vooral bezig geweest met alle code goed nalopen. De control panel heb ik 
 
 Ik heb dezelfde soort styling gebruikt alleen geprobeerd wat meer controls toe te voegen aan mijn ontwerp. Ik heb geen nieuwe bloemen gemaakt maar alleen de kleuren aangepast om tijd te besparen. 
 
-Daarnaast ben ik bezig gegaan met de achtergronden veranderen. Hier heb ik achteraf niet genoeg tijd aan besteed. Ik probeerde met een grid in de body een regenboog te maken maar er zit al een grid op de body om ervoor te zorgen dat alles goed gepositioneerd staat. Als ik meer tijd had zou ik dit helemaal omgooien en daar meer aandacht aan besteden. Ik ben te veel bezig geweest met de control panel mooi en werkend te krijgen
+Daarnaast ben ik bezig gegaan met de achtergronden veranderen. Hier heb ik achteraf niet genoeg tijd aan besteed. Ik probeerde met een grid in de body een regenboog te maken maar er zit al een grid op de body om ervoor te zorgen dat alles goed gepositioneerd staat. Als ik meer tijd had zou ik dit helemaal omgooien en daar meer aandacht aan besteden. Ik ben te veel bezig geweest met de control panel mooi en werkend te krijgen.
 
 **Wat heb ik geleerd?**
 
-CSS nesting heeft mij geholpen om bepaalde elementen alleen werkend te krijgen binnen de {}. Daarnaast heb ik veel geleerd over het 3d ontwerpen en dat het veel moeilijker lijkt dan dat het daadwerkelijk is. Door 
-perspective en transform-style: preserve-3d te gebruiken kon ik mijn bloem 3d krijgen en positioneren. 
+Ik heb geleerd hoe ik kan nesten in CSS. Hiervoor schreef ik alle selectors los van elkaar die specfiek genoeg moesten zijn om bij het html atribuut aan te sluiten. Door te nesten kon ik elemeten stijlen binnen de accolades van hun parent waardoor ik overzichtelijke code heb en geen onnodig werk meer hoef te doen.
+
+Daarnaast heb ik voor het eerst @layer gebruikt om mijn CSS op te splitsen in lagen zoals reset, tokens, layout, components en themes. Wat ik ervan heb begrepen is dat @layers op verschillende manieren gebruikt kan worden. Je kan variaties maken op je styling, je kan de CSS makkelijk opdelen en hierachy maken. Inplaats van dat ik nu van boven naar onder werk en steeds moet nadenken over wat waar staat, kan je hiermee heel makkelijk in de juiste laag werken. Door 'Harry Robert’s Inverted Triangle CSS' heb ik hier ook meer begrip voor gekregen. Hierdoor kan ik nu in het vervolg met mijn andere websites @layers gebruiken om layout te onderscheiden van components etc. De @layers in de juiste volgorde zetten was wel een puzzel de eerste keer maar na wat filmpjes kijken en voor jezelf duidelijk nagaan wat waar hoort te staan is het gelukt!
+
+Ik heb ook geleerd dat 3D ontwerpen in CSS veel makkelijker is dan het lijkt. Door perspective en transform-style: preserve-3d te gebruiken kon ik mijn bloem met behulp van Sanne hem 3D krijgen. Met de eerste kubus ben ik verder gegaan met het ontwerpen van de hele bloem :)
 
 ## Bronnen
 
-* Inspiratie: project van student uit vorig jaar (Minecraft-kat in CSS)
 * Sanne (docent) – uitleg over 3D-kubussen met perspective en transform-style, week 2
 * MDN Web Docs – CSS transform
 * MDN Web Docs – CSS nesting
 * MDN Web Docs – @keyframes
-* MDN Web Docs – perspective
+* CSS Tricks -  
 * Minecraft bloemendesigns als visuele referentie

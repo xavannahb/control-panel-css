@@ -1,0 +1,443 @@
+@font-face {
+    font-family: 'minecraft-font';
+    src: url('../fonts/minecraft.ttf'); 
+}
+
+/* BRON: Voor de uitleg en indeling van de @layers:  https://css-tricks.com/css-cascade-layers/ */
+
+/* LAYER VOLGORDE - latere layers winnen bij conflicten */
+@layer reset, colors, base, layout, components, themes, utilities;
+
+/* RESET - basis layout dingen*/
+@layer reset {
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+ 
+    body {
+        margin: 0;
+    }
+}
+
+/* COLORS - kleuren */
+@layer colors {
+    :root {
+        /* tekst */
+        --color-text: #fff;
+ 
+        /* bloem kleuren */
+        --f1-light-red: rgb(236, 38, 38);
+        --f1-red:       rgb(180, 28, 28);
+        --f1-dark-red:  rgb(114, 12, 12);
+ 
+        --f1-green:      rgb(8, 124, 58);
+        --f1-dark-green: rgb(11, 95, 19);
+ 
+        /* control panel kleuren */
+        /* BRON: ChatGPT prompt: Geef voor mijn ontwerp minecraft kleuren */
+        --color-sky:        #a4d0ed;
+        --color-grass:      #41a76b;
+        --color-grass-dark: #2f5f28;
+        --color-dirt:       #8b5a2b;
+        --color-dirt-dark:  #5a3a1b;
+        --color-dirt-light: #a36a35;
+        --color-stone:      #c6c6c6;
+        --color-stone-dark: #5c5c5c;
+    }
+}
+
+/* BASE - typografie en basis elementen */
+@layer base {
+    body {
+        background: linear-gradient(to bottom, var(--color-sky) 80%, var(--color-grass) 20%);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+ 
+    h1 {
+        font-family: 'minecraft-font';
+        margin: 1em auto;
+        width: max-content;
+        background-color: rgba(0, 0, 0, 0.25);
+        padding: 0.5em;
+        text-align: center;
+        color: var(--color-text);
+        letter-spacing: 0.05rem;
+    }
+ 
+    h2 {
+        font-family: 'minecraft-font';
+        color: var(--color-text);
+        text-align: center;
+        letter-spacing: 0.1rem;
+    }
+ 
+    fieldset {
+        border: 3px solid var(--color-dirt-dark);
+        padding: 0.5rem;
+    }
+ 
+    legend {
+        padding: 0.3rem 0.6rem;
+        color: var(--color-text);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.7rem;
+    }
+ 
+    input[type="radio"] {
+        display: none;
+    }
+}
+
+/* LAYOUT - pagina structuur en grid */
+@layer layout {
+    body {
+        display: grid;
+        grid-template-columns: 1fr 14rem;
+        grid-template-rows: 12rem auto;
+    }
+ 
+    header {
+        grid-area: 1 / 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+ 
+    main {
+        perspective: 60em;
+        min-height: 80dvh;
+        grid-area: 2 / 1;
+    }
+ 
+    aside {
+        grid-area: span 2 / 2;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0.75rem;
+    }
+ 
+    /* 3D context voor alles binnen main */
+    main, main * {
+        transform-style: preserve-3d;
+    }
+}
+
+/* COMPONENTS - herbruikbare UI-onderdelen */
+@layer components {
+ 
+    /* --- Bloem grid --- */
+    section {
+        --s: 3em;
+ 
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, var(--s));
+        grid-template-rows: repeat(11, var(--s));
+        place-items: center;
+        place-content: center;
+ 
+        transition: 1.5s ease; /* vloeiend verloop bij positieverandering */
+        rotate: y 0deg;
+ 
+        /* rotatie via control panel */
+        /* BRON: samen met Sanne gemaakt */
+        html:has([value="nul"]:checked) & { rotate: y 0deg; }
+        html:has([value="links"]:checked) & { rotate: y 90deg; }
+        html:has([value="rechts"]:checked) & { rotate: y -90deg; }
+        html:has([value="omhoog"]:checked) & { rotate: x 90deg; }
+        html:has([value="omlaag"]:checked) & { rotate: x -90deg; }
+    }
+ 
+    /* KUBUS */
+    /* BRON: samen met Sanne calculaties gemaakt */
+    cube {
+        width: var(--s);
+        aspect-ratio: 1;
+        display: grid;
+ 
+        /* START LAAG */
+        &:nth-of-type(1)  { --color: var(--f1-red);        grid-area: 1/4; } /* rij 1 */
+        &:nth-of-type(2)  { --color: var(--f1-red);        grid-area: 1/5; } /* rij 1 */
+
+        &:nth-of-type(3)  { --color: var(--f1-red);        grid-area: 2/2; } /* rij 2 */
+        &:nth-of-type(4)  { --color: var(--f1-dark-red);   grid-area: 2/3; } /* rij 2 */
+        &:nth-of-type(5)  { --color: var(--f1-red);        grid-area: 2/4; } /* rij 2 */
+        &:nth-of-type(6)  { --color: var(--f1-red);        grid-area: 2/5; } /* rij 2 */
+        &:nth-of-type(7)  { --color: var(--f1-light-red);  grid-area: 2/6; } /* rij 2 */
+
+        &:nth-of-type(8)  { --color: var(--f1-red);        grid-area: 3/1; } /* rij 3 */
+        &:nth-of-type(9)  { --color: var(--f1-red);        grid-area: 3/2; } /* rij 3 */
+        &:nth-of-type(10) { --color: var(--f1-red);        grid-area: 3/3; } /* rij 3 */
+        &:nth-of-type(11) { --color: var(--f1-dark-red);   grid-area: 3/4; } /* rij 3 */
+        &:nth-of-type(12) { --color: var(--f1-red);        grid-area: 3/5; } /* rij 3 */
+        &:nth-of-type(13) { --color: var(--f1-dark-red);   grid-area: 3/6; } /* rij 3 */
+
+        &:nth-of-type(14) { --color: var(--f1-light-red);  grid-area: 4/1; } /* rij 4 */
+        &:nth-of-type(15) { --color: var(--f1-light-red);  grid-area: 4/2; } /* rij 4 */
+        &:nth-of-type(16) { --color: var(--f1-red);        grid-area: 4/3; } /* rij 4 */
+        &:nth-of-type(17) { --color: var(--f1-dark-red);   grid-area: 4/4; } /* rij 4 */
+        &:nth-of-type(18) { --color: var(--f1-dark-red);   grid-area: 4/5; } /* rij 4 */
+
+        &:nth-of-type(19) { --color: var(--f1-light-red);  grid-area: 5/2; } /* rij 5 */
+        &:nth-of-type(20) { --color: var(--f1-green);      grid-area: 5/3; } /* rij 5 */
+        &:nth-of-type(21) { --color: var(--f1-dark-green); grid-area: 5/4; } /* rij 5 */
+
+        &:nth-of-type(22) { --color: var(--f1-green);      grid-area: 6/4; } /* rij 6 */
+
+        &:nth-of-type(23) { --color: var(--f1-green);      grid-area: 7/4; } /* rij 7 */
+
+        &:nth-of-type(24) { --color: var(--f1-green);      grid-area: 8/4; } /* rij 8 */
+
+        &:nth-of-type(25) { --color: var(--f1-dark-green); grid-area: 9/1; } /* rij 9 */
+        &:nth-of-type(26) { --color: var(--f1-green);      grid-area: 9/2; } /* rij 9 */
+        &:nth-of-type(27) { --color: var(--f1-green);      grid-area: 9/4; } /* rij 9 */
+        &:nth-of-type(28) { --color: var(--f1-green);      grid-area: 9/6; } /* rij 9 */
+        &:nth-of-type(29) { --color: var(--f1-green);      grid-area: 9/7; } /* rij 9 */
+
+        &:nth-of-type(30) { --color: var(--f1-dark-green); grid-area: 10/2; } /* rij 10 */
+        &:nth-of-type(31) { --color: var(--f1-dark-green); grid-area: 10/4; } /* rij 10 */
+        &:nth-of-type(32) { --color: var(--f1-green);      grid-area: 10/5; } /* rij 10 */
+
+        &:nth-of-type(33) { --color: var(--f1-green);      grid-area: 11/3; } /* rij 11 */
+        &:nth-of-type(34) { --color: var(--f1-dark-green); grid-area: 11/4; } /* rij 11 */
+ 
+        /* TWEEDE LAAG: naar voren */
+        &:nth-of-type(35) { --color: var(--f1-light-red);  grid-area: 1/4;  translate: 0 0 var(--s); } /* rij 1 */
+
+        &:nth-of-type(36) { --color: var(--f1-red);        grid-area: 2/3;  translate: 0 0 var(--s); } /* rij 2 */
+        &:nth-of-type(37) { --color: var(--f1-red);        grid-area: 2/4;  translate: 0 0 var(--s); } /* rij 2 */
+        &:nth-of-type(38) { --color: var(--f1-red);        grid-area: 2/5;  translate: 0 0 var(--s); } /* rij 2 */
+
+        &:nth-of-type(39) { --color: var(--f1-light-red);  grid-area: 3/2;  translate: 0 0 var(--s); } /* rij 3 */
+        &:nth-of-type(40) { --color: var(--f1-red);        grid-area: 3/3;  translate: 0 0 var(--s); } /* rij 3 */
+        &:nth-of-type(41) { --color: var(--f1-red);        grid-area: 3/4;  translate: 0 0 var(--s); } /* rij 3 */
+        &:nth-of-type(42) { --color: var(--f1-dark-red);   grid-area: 3/5;  translate: 0 0 var(--s); } /* rij 3 */
+
+        &:nth-of-type(43) { --color: var(--f1-red);        grid-area: 4/3;  translate: 0 0 var(--s); } /* rij 4 */
+        &:nth-of-type(44) { --color: var(--f1-dark-red);   grid-area: 4/4;  translate: 0 0 var(--s); } /* rij 4 */
+
+        &:nth-of-type(45) { --color: var(--f1-dark-red);   grid-area: 5/4;  translate: 0 0 var(--s); } /* rij 5 */
+
+        &:nth-of-type(46) { --color: var(--f1-green);      grid-area: 9/6;  translate: 0 0 var(--s); } /* rij 9 */
+
+        &:nth-of-type(47) { --color: var(--f1-dark-green); grid-area: 10/5; translate: 0 0 var(--s); } /* rij 10 */
+
+        &:nth-of-type(48) { --color: var(--f1-dark-green); grid-area: 11/3; translate: 0 0 var(--s); } /* rij 11 */
+        &:nth-of-type(49) { --color: var(--f1-dark-green); grid-area: 11/4; translate: 0 0 var(--s); } /* rij 11 */
+ 
+        /* DERDE LAAG: naar voren */
+        &:nth-of-type(50) { --color: var(--f1-light-red);  grid-area: 2/4;  translate: 0 0 calc(var(--s) * 2); } /* rij 2 */
+
+        &:nth-of-type(51) { --color: var(--f1-red);        grid-area: 3/3;  translate: 0 0 calc(var(--s) * 2); } /* rij 3 */
+        &:nth-of-type(52) { --color: var(--f1-red);        grid-area: 3/4;  translate: 0 0 calc(var(--s) * 2); } /* rij 3 */
+
+        &:nth-of-type(53) { --color: var(--f1-dark-red);   grid-area: 4/4;  translate: 0 0 calc(var(--s) * 2); } /* rij 4 */
+
+        &:nth-of-type(54) { --color: var(--f1-green);      grid-area: 10/5; translate: 0 0 calc(var(--s) * 2); } /* rij 10 */
+
+        &:nth-of-type(55) { --color: var(--f1-dark-green); grid-area: 11/4; translate: 0 0 calc(var(--s) * 2); } /* rij 11 */
+ 
+        /* TWEEDE LAAG: naar achter */
+        &:nth-of-type(56) { --color: var(--f1-light-red);  grid-area: 2/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
+        &:nth-of-type(57) { --color: var(--f1-light-red);  grid-area: 2/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
+        &:nth-of-type(58) { --color: var(--f1-red);        grid-area: 2/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
+
+        &:nth-of-type(59) { --color: var(--f1-light-red);  grid-area: 3/2;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(60) { --color: var(--f1-red);        grid-area: 3/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(61) { --color: var(--f1-red);        grid-area: 3/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(62) { --color: var(--f1-red);        grid-area: 3/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+
+        &:nth-of-type(63) { --color: var(--f1-light-red);  grid-area: 4/2;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(64) { --color: var(--f1-red);        grid-area: 4/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(65) { --color: var(--f1-red);        grid-area: 4/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(66) { --color: var(--f1-dark-red);   grid-area: 4/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+
+        &:nth-of-type(67) { --color: var(--f1-dark-green); grid-area: 10/3; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
+        &:nth-of-type(68) { --color: var(--f1-green);      grid-area: 10/4; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
+        &:nth-of-type(69) { --color: var(--f1-dark-green); grid-area: 10/5; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
+
+        &:nth-of-type(70) { --color: var(--f1-green);      grid-area: 11/4; translate: 0 0 calc(var(--s) * -1); } /* rij 11 */
+ 
+        /* DERDE LAAG: naar achter */
+        &:nth-of-type(71) { --color: var(--f1-red); grid-area: 3/4; translate: 0 0 calc(var(--s) * -2); } /* rij 3 */
+        &:nth-of-type(72) { --color: var(--f1-red); grid-area: 3/5; translate: 0 0 calc(var(--s) * -2); } /* rij 3 */
+    }
+ 
+    /* --- Kubus zijkanten --- */
+    /* BRON: samen met Sanne gemaakt */
+    side {
+        grid-area: 1/1;
+        width: 100%;
+        aspect-ratio: 1;
+        background-image: linear-gradient(45deg, var(--color, white), #fff1); /* gradient simuleert lichtinval */
+ 
+        &:nth-of-type(1) /* voorkant */  { transform: translateZ(calc(var(--s) / 2)); }
+        &:nth-of-type(2) /* rechts */    { transform: rotateY(90deg)  translateZ(calc(var(--s) / 2)); }
+        &:nth-of-type(3) /* achter */    { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
+        &:nth-of-type(4) /* links */     { transform: rotateY(270deg) translateZ(calc(var(--s) / 2)); }
+        &:nth-of-type(5) /* boven */     { transform: rotateX(90deg)  translateZ(calc(var(--s) / 2)); }
+        &:nth-of-type(6) /* onder */     { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
+    }
+ 
+    /* --- Control panel --- */
+    aside {
+        background: var(--color-dirt);
+        box-shadow:
+            inset 4px 0 0 var(--color-dirt-light),
+            -6px 0 0 var(--color-dirt-dark);
+    }
+ 
+    fieldset {
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow:
+            inset 2px 2px 0 rgba(255, 255, 255, 0.08),
+            inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+ 
+    legend {
+        background: var(--color-grass);
+        border: 3px solid var(--color-grass-dark);
+        box-shadow: 3px 3px 0 #1a1a1a;
+    }
+ 
+    /* labels voor bloem + tijd fieldsets */
+    fieldset:nth-of-type(1) label,
+    fieldset:nth-of-type(2) label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.5rem;
+        color: var(--color-text);
+        font-size: 0.85rem;
+        border: 2px solid transparent;
+        cursor: pointer;
+ 
+        &:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+    }
+ 
+    fieldset:nth-of-type(1) input[type="radio"]:checked + label,
+    fieldset:nth-of-type(2) input[type="radio"]:checked + label {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: var(--color-grass);
+    }
+ 
+    /* rotatie fieldset als pijlen-grid */
+    fieldset:nth-of-type(3) {
+        display: grid;
+        grid-template-columns: repeat(3, 50px);
+        grid-template-rows: repeat(3, 50px);
+        gap: 0.3rem;
+        padding: 0.75rem;
+        place-content: center;
+ 
+        & label:nth-of-type(1) { grid-area: 2/1; }
+        & label:nth-of-type(2) { grid-area: 1/2; }
+        & label:nth-of-type(3) { grid-area: 2/2; }
+        & label:nth-of-type(4) { grid-area: 3/2; }
+        & label:nth-of-type(5) { grid-area: 2/3; }
+    }
+ 
+    /* pijlknop styling */
+    .pijl {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+        background: var(--color-stone);
+        border: 3px solid var(--color-stone-dark);
+        color: var(--color-stone-dark);
+        box-shadow:
+            inset 2px 2px 0 var(--color-stone),
+            inset -2px -2px 0 var(--color-stone-dark); /* BRON: Claude 'ik krijg de radio button niet gestijld, kan je me helpen?' */
+        cursor: pointer;
+    }
+ 
+    label:hover .pijl {
+        transform: scale(1.1);
+    }
+ 
+    input[type="radio"]:checked + label .pijl {
+        background: var(--color-grass);
+        border-color: var(--color-grass-dark);
+        color: var(--color-text);
+        box-shadow:
+            inset 2px 2px 0 var(--color-grass),
+            inset -2px -2px 0 var(--color-grass-dark);
+    }
+}
+ 
+ 
+/* THEMES - kleur en themawisselingen van de control panel */
+@layer themes {
+ 
+    /* bloem: blauw */
+    html:has(#blauw:checked) cube {
+        --f1-light-red: rgb(100, 149, 237);
+        --f1-red:       rgb(30, 90, 180);
+        --f1-dark-red:  rgb(10, 40, 120);
+    }
+ 
+    /* bloem: geel */
+    html:has(#geel:checked) cube {
+        --f1-light-red: rgb(255, 230, 80);
+        --f1-red:       rgb(220, 170, 0);
+        --f1-dark-red:  rgb(150, 100, 0);
+    }
+ 
+    /* nacht thema */
+    html:has(#nacht:checked) {
+        --color-sky:        #0d1b2a;
+        --color-grass:      #1a3a22;
+        --color-grass-dark: #0d2212;
+        --color-dirt:       #3a2510;
+        --color-dirt-dark:  #1e1208;
+        --color-dirt-light: #5a3820;
+        --color-stone:      #444;
+        --color-stone-dark: #222;
+    }
+ 
+    html:has(#nacht:checked) body {
+        background-color: var(--color-sky);
+    }
+ 
+    /* regenboog thema */
+    html:has(#regenboog:checked) body {
+        background-image: linear-gradient(to right, red, orange, yellow, lime, cyan, blue, violet);
+    }
+ 
+    html:has(#regenboog:checked) legend {
+        --color-text: black;
+    }
+}
+ 
+ 
+/* UTILITIES - responsive overrides */
+@layer utilities {
+    @media (max-width: 600px) {
+        body {
+            grid-template-columns: 1fr;
+            grid-template-rows: 12rem auto 14rem;
+        }
+ 
+        aside {
+            grid-area: 3 / 1;
+            flex-direction: row;
+            overflow-x: auto;
+            padding: 0.75rem;
+        }
+ 
+        fieldset {
+            flex-direction: column;
+        }
+    }
+}
