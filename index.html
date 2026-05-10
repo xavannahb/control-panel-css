@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Flower 3D</title>
+    <title>Minecraft Bloem 3D</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="shortcut icon" href="flower-red.png"> <!-- icon op google -->
+    <link rel="shortcut icon" href="flower-red.png">
 
 </head>
 <body>
     <header> 
-        <h1>Minecraft Flower</h1>
+        <h1>Minecraft Bloem</h1>
     </header>
     <!-- Background -->
     <main>
-        <!-- Minecraft Flower -->
+        <!-- Minecraft Bloem -->
         <section>
             <!-- START LAAG -->
 
@@ -664,62 +664,50 @@
         </section>
     </main>
 
-    <footer>
+    <aside>
+        <h2>Controlpanel</h2>
         <fieldset>
             <legend>Flower</legend>
-                <label>
-                    <input type="radio" name="bloem" value="rood">
-                    <span class="">Rood</span>
-                </label>
-                <label>
-                    <input type="radio" name="bloem" value="blauw">
-                    <span class="">Blauw</span>
-                </label>
-                <label>
-                    <input type="radio" name="bloem" value="geel">
-                    <span class="">Geel</span>
-                </label>
+                <input type="radio" name="bloem" value="rood" id="rood" checked>
+                <label for="rood">Rood</label>
+    
+                <input type="radio" name="bloem" value="blauw" id="blauw">
+                <label for="blauw">Blauw</label>
+
+                <input type="radio" name="bloem" value="geel" id="geel">
+                <label for="geel">Geel</label>
         </fieldset>
 
         <fieldset>
             <legend>Tijd</legend>
-                <label>
-                    <input type="radio" name="tijd" value="dag">
-                    <span class="">Dag</span>
-                </label>
-                <label>
-                    <input type="radio" name="tijd" value="nacht">
-                    <span class="">Nacht</span>
-                </label>
+                <input type="radio" name="tijd" id="dag" checked>
+                <label for="dag">Dag</label>
+
+                <input type="radio" name="tijd" id="nacht">
+                <label for="nacht">Nacht</label>
+
+                <input type="radio" name="tijd" id="regenboog">
+                <label for="regenboog">Regenboog</label>
         </fieldset>
+
         <fieldset>
-            <legend>Status</legend>
-                <label>
-                    <input type="radio" name="draai" value="links">
-                    <span class="pijl">&#9664;</span>
-                </label>
+            <legend>Rotatie</legend>
+                <input type="radio" name="draai" value="links" id="links">
+                <label for="links"><span class="pijl">&#9664;</span></label>
 
+                <input type="radio" name="draai" value="omhoog" id="omhoog">
+                <label for="omhoog"><span class="pijl">&#9650;</span></label>
 
-                <label>
-                    <input type="radio" name="draai" value="omhoog">
-                    <span class="pijl">&#9650;</span>
-                </label>
+                <input type="radio" name="draai" value="nul" id="nul" checked>
+                <label for="nul"><span class="pijl">0</span></label>
+    
+                <input type="radio" name="draai" value="omlaag" id="omlaag">
+                <label for="omlaag"><span class="pijl">&#9660;</span></label>
 
-                <label>
-                    <input type="radio" name="draai" value="nul" checked>
-                    <span class="pijl">0</span>
-                </label>
-
-                <label>
-                    <input type="radio" name="draai" value="omlaag">
-                    <span class="pijl">&#9660;</span>
-                </label>
-
-                <label>
-                    <input type="radio" name="draai" value="rechts">
-                    <span class="pijl">&#9654;</span>
-                </label>
+                <input type="radio" name="draai" value="rechts" id="rechts">
+                <label for="rechts"><span class="pijl">&#9654;</span></label>
+            </label>
         </fieldset>
-    </footer>
+    </aside>
 </body>
 </html>

@@ -4,28 +4,46 @@
 }
 
 :root {
-    /* background */
-    --background-color: #a4d0ed;
-    /* achtergrond footer */
-    --background-color-footer: #41a76b;
-    --border-color-green-footer: #2f5f28;
+    /* text */
+    --color-text: #fff;
+
+    /* bloemen kleuren */
+    --f1-light-red: rgb(236, 38, 38);
+    --f1-red: rgb(180, 28, 28);
+    --f1-dark-red: rgb(114, 12, 12);
+
+    --f1-green: rgb(8, 124, 58);
+    --f1-dark-green: rgb(11, 95, 19);
+
+    /* control panel kleuren */
+
+    --color-sky: #a4d0ed;
+    --color-grass: #41a76b;
+    --color-grass-dark: #2f5f28;
+    --color-dirt: #8b5a2b;
+    --color-dirt-dark: #5a3a1b;
+    --color-dirt-light: #a36a35;
+    --color-stone: #c6c6c6;
+    --color-stone-dark: #5c5c5c;
+    /* BRON: ChatGPT prompt: Geef voor mijn ontwerp minecraft kleuren */
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        --background-color: #1d608c;
-    }
 
-    footer {
-        --background-color-footer: #2c731e;
-        --border-color-green-footer: #194713;
-    }
-}
-
+/* MAIN STYLING */
 body {
     margin: 0;
-    background-color: var(--background-color);
+    background: linear-gradient(to bottom, var(--color-sky) 80%, var(--color-grass) 20%);
     font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 14rem;
+    grid-template-rows: 12rem auto;
+}
+
+header {
+    grid-area: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -35,20 +53,21 @@ h1 {
     background-color: rgba(0, 0, 0, 0.25);
     padding: 0.5em 0.5em;
     text-align: center;
-    color: #fff;
+    color: var(--color-text);
     letter-spacing: 0.05rem;
 }
 
 main {
-    perspective: 80em; 
+    perspective: 60em; 
+    min-height: 80dvh;
+    grid-area: 2 / 1;
 }
 
 section {
-    --s: 2.5em;
+    --s: 3em;
 
     width: 100%;
     height: 100%;
-    margin-top: 3em;
     display: grid;
     grid-template-columns: repeat(7, var(--s));
     grid-template-rows: repeat(11, var(--s));
@@ -78,32 +97,25 @@ section {
     html:has([value="omlaag"]:checked) & {
         rotate:x -90deg;
     }
-  
+    /* BRON: samen met Sanne gemaakt */
 }
-
 
 main, main * {
     transform-style: preserve-3d;
 }
 
-/* kubus */
 
+/* KUBUS */
 /* gehele kubus */
 cube {
-    /* bloemen kleuren */
-    --f1-light-red: rgb(236, 38, 38);
-    --f1-red: rgb(180, 28, 28);
-    --f1-dark-red: rgb(114, 12, 12);
-
-    --f1-green: rgb(8, 124, 58);
-    --f1-dark-green: rgb(11, 95, 19);
-
     width: var(--s); /* grote van de kubus */
     aspect-ratio: 1; /* past de height aan op basis van de width */
     display: grid; 
     
     /*     translate:0 0 calc(var(--s) * -1); zorgt ervoor dat de bloem naar achter gaat */
     /*     translate:0 0 var(--s); zorgt ervoor dat de bloem naar voren gaat */
+    
+    /* BRON: samen met Sanne calculaties gemaakt */
     
     /* START LAAG */
         &:nth-of-type(1) /* rij 1 */ {
@@ -474,7 +486,6 @@ side {
     grid-area: 1/1;
     width: 100%;
     aspect-ratio: 1;
-    /* background-color: var(--color); */
     background-image: linear-gradient(45deg,var(--color, white),#fff1); /* zorgt ervoor dat de zijkanten een gradiant hebben ipv 1 vlakke kleur */
     &:nth-of-type(1) /* voorkant */ {
         transform: 
@@ -505,51 +516,112 @@ side {
         rotateX(-90deg) /* draait de onderkant 90 graden naar onder op de X as */
         translatez(calc(var(--s) /2 ));
     }
+    /* BRON: samen met Sanne gemaakt */
 }
-/* Footer */
 
-footer {
+
+/* CONTROLPANEL */
+aside {
+    grid-area: span 2 / 2;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 2rem;
-    background: var(--background-color-footer);
-    border-top: 6px solid var(--border-color-green-footer); 
-    /* kleuren footer: Chatgpt prompt 'Geef me kleuren van een minecraft blokje' */
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0.75rem;
+    background: var(--color-dirt);
+    box-shadow:
+        inset 4px 0 0 var(--color-dirt-light),
+        -6px 0 0 var(--color-dirt-dark);
+}
+
+aside h2 {
+    font-family: 'minecraft-font';
+    color: var(--color-text);
+    text-align: center;
+    letter-spacing: 0.1rem;
 }
 
 fieldset {
-    background: #8b5a2b;
-    border: 4px solid #5a3a1b;
-
+    background: rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--color-dirt-dark);
     box-shadow:
-        inset 4px 4px 0 #a36a35,
-        inset -4px -4px 0 #6d431d,
-        6px 6px 0 #1a1a1a;
-    color: white;
-}
-
-fieldset:nth-of-type(3) {
-    display: grid;
-    grid-template-columns: 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px;
-    gap: 10px;
-    padding: 1rem;
+        inset 2px 2px 0 rgba(255,255,255,0.08),
+        inset -2px -2px 0 rgba(0,0,0,0.3);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
 legend {
-    font-family: 'minecraft-font';
-    padding: 0.4rem 1rem;
-    background: var(--background-color-footer);
-    border: 4px solid var(--border-color-green-footer);
+    padding: 0.3rem 0.6rem;
+    background: var(--color-grass);
+    border: 3px solid var(--color-grass-dark);
+    color: var(--color-text);
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 4px 4px 0 #1a1a1a;
+    font-size: 0.7rem;
+    box-shadow: 3px 3px 0 #1a1a1a;
+}
+    
+fieldset:nth-of-type(1) label,
+fieldset:nth-of-type(2) label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    color: var(--color-text);
+    font-size: 0.85rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+} 
+
+fieldset:nth-of-type(1) input[type="radio"]:checked + label,
+fieldset:nth-of-type(2) input[type="radio"]:checked + label {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-grass);
 }
 
-label {
-    cursor: pointer;
+
+/* vierkantje voor de labels */
+/* fieldset:nth-of-type(1) label:nth-of-type(1) label::before { background: rgb(180, 28, 28); }
+fieldset:nth-of-type(1) label:nth-of-type(2) label::before { background: rgb(30, 90, 180); }
+fieldset:nth-of-type(1) label:nth-of-type(3) label::before { background: rgb(220, 170, 0); }
+fieldset:nth-of-type(2) label:nth-of-type(1) label::before { background: #a4d0ed; }
+fieldset:nth-of-type(2) label:nth-of-type(2) label::before { background: #0d1b2a; }
+fieldset:nth-of-type(2) label:nth-of-type(3) label::before {
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet); /* regenboog label */
+
+/* BRON: ChatGPT prompt: 'wat kan ik toevoegen om de labels wat aantrekkelijker te maken' */
+
+fieldset:nth-of-type(3) {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows:    repeat(3, 50px);
+    gap: 0.3rem;
+    padding: 0.75rem;
+    place-content: center;
+
+        & label:nth-of-type(1) { 
+            grid-area: 2/1;
+        }
+
+        & label:nth-of-type(2) { 
+            grid-area: 1/2; 
+        }
+
+        & label:nth-of-type(3) { 
+            grid-area: 2/2; 
+        }
+        & label:nth-of-type(4) { 
+            grid-area: 3/2; 
+        }
+        & label:nth-of-type(5) { 
+            grid-area: 2/3; 
+        }
 }
 
 input[type="radio"] {
@@ -560,48 +632,78 @@ input[type="radio"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    background: var(--color-stone);
+    border: 3px solid var(--color-stone-dark);
+    color: var(--color-stone-dark);
+        box-shadow:
+            inset 2px 2px 0 var(--color-stone),
+            inset -2px -2px 0 var(--color-stone-dark);
+        cursor: pointer; 
+         /* Bron: Claude 'ik krijg de radio button niet gestijld, kan je me helpen?' */
 
-    width: 50px;
-    height: 50px;
-
-    font-size: 22px;
-    font-family: "Courier New", monospace;
-
-    background: #c6c6c6;
-    border: 3px solid #5c5c5c;
-
-    box-shadow:
-        inset 2px 2px 0 #ffffff55,
-        inset -2px -2px 0 #7a7a7a;
+        input[type="radio"]:checked + label {
+    background: var(--color-grass);
+}
 }
 
-/* pijltjes */
-input[type="radio"]:checked + .pijl {
-    background: #7bc96f;
-    border-color: #2f5f28;
-
-    box-shadow:
-        inset 2px 2px 0 #b7f5a9,
-        inset -2px -2px 0 #3c7a30;
-}
-
-/* plaatsing pijltjes */
-label:nth-of-type(1) {
-    grid-area: 2/1;
-}
-label:nth-of-type(2) {
-    grid-area: 1/2;
-}
-label:nth-of-type(3) {
-    grid-area: 2/2;
-}
-label:nth-of-type(4) {
-    grid-area: 3/2;
-}
-label:nth-of-type(5) {
-    grid-area: 2/3;
-}
-/* transform pijltjes */
 label:hover .pijl {
     transform: scale(1.1);
+}
+
+input[type="radio"]:checked + label .pijl {
+    background: var(--color-grass);
+    border: 3px solid var(--color-grass-dark);
+    color: var(--color-text);
+}
+
+
+/* CONTROL PANEL WERKING */
+
+/* bloem blauw */
+html:has(#blauw:checked) cube {
+    --f1-light-red: rgb(100, 149, 237);
+    --f1-red:       rgb(30, 90, 180);
+    --f1-dark-red:  rgb(10, 40, 120);
+}
+
+/* bloem geel */
+html:has(#geel:checked) cube {
+    --f1-light-red: rgb(255, 230, 80);
+    --f1-red:       rgb(220, 170, 0);
+    --f1-dark-red:  rgb(150, 100, 0);
+}
+
+/* nacht thema */
+html:has(#nacht:checked) {
+    --color-sky:        #0d1b2a;
+    --color-grass:      #1a3a22;
+    --color-grass-dark: #0d2212;
+    --color-dirt:       #3a2510;
+    --color-dirt-dark:  #1e1208;
+    --color-dirt-light: #5a3820;
+    --color-stone:      #444;
+    --color-stone-dark: #222;
+}
+
+html:has(#nacht:checked) body {
+    background-color: var(--color-sky);
+}
+
+/* regenboog thema */
+
+html:has(#regenboog:checked) body {
+    background-image:
+    linear-gradient(to right, red, orange, yellow, lime, cyan, blue, violet, violet);
+}
+
+
+html:has(#regenboog:checked) {
+    --color-grass: linear-gradient(to right, red, orange, yellow, lime, cyan, blue, violet);
+}
+
+html:has(#regenboog:checked) legend {
+    --color-text: black;
 }
