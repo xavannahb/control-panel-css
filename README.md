@@ -24,6 +24,12 @@ De feedback was  het ontwerp was te statisch. Alles lag plat, er was geen diepte
 
 Het ontwerp was leuk bedacht alleen een beetje plat. Het is eigenlijk gewoon een 2d bloem. Hier is het misschien leuk om hem 3d te maken. En de zon en maan zijn in minecraft toch ook niet rond? 
 
+// doet een HTTP request naar de API van Amsterdam | = await wacht tot de data binnen is om vervolgens fetch response op te slaan in de response
+
+**Resultaat na week 1**
+
+<img width="1436" height="727" alt="Screenshot 2026-05-10 at 12 57 59" src="https://github.com/user-attachments/assets/c351676e-d01c-4164-bb16-78fe6d57534e" />
+
 ### Week 2
 
 **Wat heb ik gedaan?**
@@ -46,6 +52,10 @@ Dat het maken van een 3D-kubus in CSS makkelijker is dan het lijkt. Ik vond het 
 **Feedback**
 
 Ik had nog niet echt een 'controlpanel' wat eigenlijk de bedoeling was van de opdracht. Ik had kubussen en bloemen, maar het "control panel" zelf ontbrak nog. Het paneel er echt als een bedieningspaneel uit moest zien niet als een formulier of een rij buttons.
+
+**Resultaat na week 2**
+
+<img width="1440" height="778" alt="Screenshot 2026-05-10 at 12 50 21" src="https://github.com/user-attachments/assets/080290d2-4e67-4ff6-abe9-0c148d1b1c1c" />
 
 ### Week 3
 
