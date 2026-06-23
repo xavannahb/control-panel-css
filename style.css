@@ -49,7 +49,7 @@
 /* BASE - typografie en basis elementen */
 @layer base {
     body {
-        background: linear-gradient(to bottom, var(--color-sky) 80%, var(--color-grass) 20%);
+        background: url('../minecraft-background.jpg') center / cover no-repeat fixed;
         font-family: Arial, Helvetica, sans-serif;
     }
  
