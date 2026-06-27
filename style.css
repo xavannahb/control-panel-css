@@ -32,6 +32,10 @@
  
         --f1-green:      rgb(8, 124, 58);
         --f1-dark-green: rgb(11, 95, 19);
+
+        --pot-light: rgb(200, 100, 60);
+        --pot-mid:   rgb(160, 75, 40);
+        --pot-dark:  rgb(110, 50, 25);
  
         /* control panel kleuren */
         /* BRON: ChatGPT prompt: Geef voor mijn ontwerp minecraft kleuren */
@@ -49,10 +53,37 @@
 /* BASE - typografie en basis elementen */
 @layer base {
     body {
-        background: url('../minecraft-background.jpg') center / cover no-repeat fixed;
+        background: linear-gradient(rgb(124, 195, 232) 0%, rgb(169, 220, 240) 45%, rgb(191, 231, 194) 60%, rgb(111, 181, 106) 60%, rgb(78, 154, 87) 100%);
         font-family: Arial, Helvetica, sans-serif;
     }
- 
+
+    main div.sun {
+        position: absolute;
+        top: 10px;
+        right: 9%;
+        width: 66px;
+        height: 66px;
+        background: rgb(255, 228, 94);
+        box-shadow: rgba(255, 228, 94, 0.55) 0px 0px 60px 18px;
+        border-radius: 4px;
+    }
+
+    .rainbow {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin-inline: auto;
+        width: fit-content;
+        display: grid;
+        grid-template-columns: repeat(16, 2.7em);
+        grid-template-rows: repeat(9, 2.7em);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
     h1 {
         font-family: 'minecraft-font';
         margin: 1em auto;
@@ -130,25 +161,46 @@
     /* --- Bloem grid --- */
     section {
         --s: 3em;
- 
+
         width: 100%;
         height: 100%;
         display: grid;
         grid-template-columns: repeat(7, var(--s));
-        grid-template-rows: repeat(11, var(--s));
+        grid-template-rows: auto auto;
         place-items: center;
         place-content: center;
- 
-        transition: 1.5s ease; /* vloeiend verloop bij positieverandering */
-        rotate: y 0deg;
- 
-        /* rotatie via control panel */
-        /* BRON: samen met Sanne gemaakt */
+
+        transition: 1.5s ease;
+        /* rotate: y 0deg;
+
         html:has([value="nul"]:checked) & { rotate: y 0deg; }
         html:has([value="links"]:checked) & { rotate: y 90deg; }
         html:has([value="rechts"]:checked) & { rotate: y -90deg; }
         html:has([value="omhoog"]:checked) & { rotate: x 90deg; }
-        html:has([value="omlaag"]:checked) & { rotate: x -90deg; }
+        html:has([value="omlaag"]:checked) & { rotate: x -90deg; } */
+    }
+
+    .flower {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(7, var(--s));
+        grid-template-rows: repeat(11, var(--s));
+        place-items: center;
+
+        scale: 0;
+        transition: scale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    html:has(#geplant:checked) .flower {
+        scale: 1;
+    }
+
+    .pot {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(7, var(--s));
+        grid-template-rows: repeat(3, var(--s));
+        place-items: center;
     }
  
     /* KUBUS */
@@ -157,7 +209,9 @@
         width: var(--s);
         aspect-ratio: 1;
         display: grid;
+    }
  
+    .flower cube {
         /* START LAAG */
         &:nth-of-type(1)  { --color: var(--f1-red);        grid-area: 1/4; } /* rij 1 */
         &:nth-of-type(2)  { --color: var(--f1-red);        grid-area: 1/5; } /* rij 1 */
@@ -235,37 +289,105 @@
         &:nth-of-type(52) { --color: var(--f1-red);        grid-area: 3/4;  translate: 0 0 calc(var(--s) * 2); } /* rij 3 */
 
         &:nth-of-type(53) { --color: var(--f1-dark-red);   grid-area: 4/4;  translate: 0 0 calc(var(--s) * 2); } /* rij 4 */
-
-        &:nth-of-type(54) { --color: var(--f1-green);      grid-area: 10/5; translate: 0 0 calc(var(--s) * 2); } /* rij 10 */
-
-        &:nth-of-type(55) { --color: var(--f1-dark-green); grid-area: 11/4; translate: 0 0 calc(var(--s) * 2); } /* rij 11 */
  
         /* TWEEDE LAAG: naar achter */
-        &:nth-of-type(56) { --color: var(--f1-light-red);  grid-area: 2/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
-        &:nth-of-type(57) { --color: var(--f1-light-red);  grid-area: 2/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
-        &:nth-of-type(58) { --color: var(--f1-red);        grid-area: 2/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
+        &:nth-of-type(54) { --color: var(--f1-light-red);  grid-area: 2/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
+        &:nth-of-type(55) { --color: var(--f1-light-red);  grid-area: 2/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
+        &:nth-of-type(56) { --color: var(--f1-red);        grid-area: 2/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 2 */
 
-        &:nth-of-type(59) { --color: var(--f1-light-red);  grid-area: 3/2;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
-        &:nth-of-type(60) { --color: var(--f1-red);        grid-area: 3/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
-        &:nth-of-type(61) { --color: var(--f1-red);        grid-area: 3/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
-        &:nth-of-type(62) { --color: var(--f1-red);        grid-area: 3/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(57) { --color: var(--f1-light-red);  grid-area: 3/2;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(58) { --color: var(--f1-red);        grid-area: 3/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(59) { --color: var(--f1-red);        grid-area: 3/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
+        &:nth-of-type(60) { --color: var(--f1-red);        grid-area: 3/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 3 */
 
-        &:nth-of-type(63) { --color: var(--f1-light-red);  grid-area: 4/2;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
-        &:nth-of-type(64) { --color: var(--f1-red);        grid-area: 4/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
-        &:nth-of-type(65) { --color: var(--f1-red);        grid-area: 4/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
-        &:nth-of-type(66) { --color: var(--f1-dark-red);   grid-area: 4/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(61) { --color: var(--f1-light-red);  grid-area: 4/2;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(62) { --color: var(--f1-red);        grid-area: 4/3;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(63) { --color: var(--f1-red);        grid-area: 4/4;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
+        &:nth-of-type(64) { --color: var(--f1-dark-red);   grid-area: 4/5;  translate: 0 0 calc(var(--s) * -1); } /* rij 4 */
 
-        &:nth-of-type(67) { --color: var(--f1-dark-green); grid-area: 10/3; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
-        &:nth-of-type(68) { --color: var(--f1-green);      grid-area: 10/4; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
-        &:nth-of-type(69) { --color: var(--f1-dark-green); grid-area: 10/5; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
+        &:nth-of-type(65) { --color: var(--f1-dark-green); grid-area: 10/3; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
+        &:nth-of-type(66) { --color: var(--f1-green);      grid-area: 10/4; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
+        &:nth-of-type(67) { --color: var(--f1-dark-green); grid-area: 10/5; translate: 0 0 calc(var(--s) * -1); } /* rij 10 */
 
-        &:nth-of-type(70) { --color: var(--f1-green);      grid-area: 11/4; translate: 0 0 calc(var(--s) * -1); } /* rij 11 */
+        &:nth-of-type(68) { --color: var(--f1-green);      grid-area: 11/4; translate: 0 0 calc(var(--s) * -1); } /* rij 11 */
  
         /* DERDE LAAG: naar achter */
-        &:nth-of-type(71) { --color: var(--f1-red); grid-area: 3/4; translate: 0 0 calc(var(--s) * -2); } /* rij 3 */
-        &:nth-of-type(72) { --color: var(--f1-red); grid-area: 3/5; translate: 0 0 calc(var(--s) * -2); } /* rij 3 */
+        &:nth-of-type(69) { --color: var(--f1-red); grid-area: 3/4; translate: 0 0 calc(var(--s) * -2); } /* rij 3 */
+        &:nth-of-type(70) { --color: var(--f1-red); grid-area: 3/5; translate: 0 0 calc(var(--s) * -2); } /* rij 3 */
     }
- 
+
+    .pot cube {
+        /* POT */
+        /* rij 1: rand */
+        &:nth-of-type(1) { --color: var(--pot-light); grid-area: 1/2; }
+        &:nth-of-type(2) { --color: var(--pot-dark);   grid-area: 1/3; }
+        &:nth-of-type(3) { --color: var(--pot-dark); grid-area: 1/4; }
+        &:nth-of-type(4) { --color: var(--pot-dark);   grid-area: 1/5; }
+        &:nth-of-type(5) { --color: var(--pot-light); grid-area: 1/6; }
+
+        /* rij 2: lichaam */
+        &:nth-of-type(6)  { --color: var(--pot-mid);  grid-area: 2/3; }
+        &:nth-of-type(7)  { --color: var(--pot-dark); grid-area: 2/4; }
+        &:nth-of-type(8)  { --color: var(--pot-mid);  grid-area: 2/5; }
+
+        /* rij 3: bodem */
+        &:nth-of-type(9)  { --color: var(--pot-mid); grid-area: 3/3; }
+        &:nth-of-type(10) { --color: var(--pot-mid); grid-area: 3/4; }
+        &:nth-of-type(11) { --color: var(--pot-mid); grid-area: 3/5; }
+
+        /* TWEEDE LAAG: naar voren */
+        /* rij 1: rand */
+        &:nth-of-type(12) { --color: var(--pot-light); grid-area: 1/2; translate: 0 0 var(--s); }
+        &:nth-of-type(13) { --color: var(--pot-dark);   grid-area: 1/3; translate: 0 0 var(--s); }
+        &:nth-of-type(14) { --color: var(--pot-dark); grid-area: 1/4; translate: 0 0 var(--s); }
+        &:nth-of-type(15) { --color: var(--pot-dark);   grid-area: 1/5; translate: 0 0 var(--s); }
+        &:nth-of-type(16) { --color: var(--pot-light); grid-area: 1/6; translate: 0 0 var(--s); }
+
+        /* rij 2: lichaam */
+        &:nth-of-type(17)  { --color: var(--pot-light);  grid-area: 2/3; translate: 0 0 var(--s); }
+        &:nth-of-type(18)  { --color: var(--pot-mid); grid-area: 2/4; translate: 0 0 var(--s); }
+        &:nth-of-type(19)  { --color: var(--pot-light);  grid-area: 2/5; translate: 0 0 var(--s); }
+
+        /* rij 3: bodem */
+        &:nth-of-type(20)  { --color: var(--pot-mid); grid-area: 3/3; translate: 0 0 var(--s); }
+        &:nth-of-type(21) { --color: var(--pot-mid); grid-area: 3/4; translate: 0 0 var(--s); }
+        &:nth-of-type(22) { --color: var(--pot-mid); grid-area: 3/5; translate: 0 0 var(--s); }
+
+        /* DERDE LAAG: naar voren */
+        /* rij 1: rand */
+        &:nth-of-type(23) { --color: var(--pot-light); grid-area: 1/2; translate: 0 0 calc(var(--s) * 2); }
+        &:nth-of-type(24) { --color: var(--pot-light); grid-area: 1/3; translate: 0 0 calc(var(--s) * 2); }
+        &:nth-of-type(25) { --color: var(--pot-light); grid-area: 1/4; translate: 0 0 calc(var(--s) * 2); }
+        &:nth-of-type(26) { --color: var(--pot-light); grid-area: 1/5; translate: 0 0 calc(var(--s) * 2); }
+        &:nth-of-type(27) { --color: var(--pot-light); grid-area: 1/6; translate: 0 0 calc(var(--s) * 2); }
+
+        /* TWEEDE LAAG: naar achter */
+        /* rij 1: rand */
+        &:nth-of-type(28) { --color: var(--pot-light); grid-area: 1/2; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(29) { --color: var(--pot-dark); grid-area: 1/3; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(30) { --color: var(--pot-dark); grid-area: 1/4; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(31) { --color: var(--pot-dark); grid-area: 1/5; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(32) { --color: var(--pot-light); grid-area: 1/6; translate: 0 0 calc(var(--s) * -1); }
+
+        /* rij 2: lichaam */
+        &:nth-of-type(33)  { --color: var(--pot-light); grid-area: 2/3; translate: 0 0 calc(var(--s) * -1);}
+        &:nth-of-type(34)  { --color: var(--pot-mid); grid-area: 2/4; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(35)  { --color: var(--pot-light); grid-area: 2/5; translate: 0 0 calc(var(--s) * -1); }
+
+        /* rij 3: bodem */
+        &:nth-of-type(36)  { --color: var(--pot-mid); grid-area: 3/3; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(37) { --color: var(--pot-mid); grid-area: 3/4; translate: 0 0 calc(var(--s) * -1); }
+        &:nth-of-type(38) { --color: var(--pot-mid); grid-area: 3/5; translate: 0 0 calc(var(--s) * -1); }
+
+        /* DERDE LAAG: naar achter */
+        /* rij 1: rand */
+        &:nth-of-type(39) { --color: var(--pot-light); grid-area: 1/2; translate: 0 0 calc(var(--s) * -2); }
+        &:nth-of-type(40) { --color: var(--pot-light); grid-area: 1/3; translate: 0 0 calc(var(--s) * -2);}
+        &:nth-of-type(41) { --color: var(--pot-light); grid-area: 1/4; translate: 0 0 calc(var(--s) * -2); }
+        &:nth-of-type(42) { --color: var(--pot-light); grid-area: 1/5; translate: 0 0 calc(var(--s) * -2); }
+        &:nth-of-type(43) { --color: var(--pot-light); grid-area: 1/6; translate: 0 0 calc(var(--s) * -2); }
+    }
+
     /* --- Kubus zijkanten --- */
     /* BRON: samen met Sanne gemaakt */
     side {
@@ -308,7 +430,8 @@
  
     /* labels voor bloem + tijd fieldsets */
     fieldset:nth-of-type(1) label,
-    fieldset:nth-of-type(2) label {
+    fieldset:nth-of-type(2) label,
+    fieldset:nth-of-type(3) label  {
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -324,13 +447,14 @@
     }
  
     fieldset:nth-of-type(1) input[type="radio"]:checked + label,
-    fieldset:nth-of-type(2) input[type="radio"]:checked + label {
+    fieldset:nth-of-type(2) input[type="radio"]:checked + label, 
+    fieldset:nth-of-type(3) input[type="radio"]:checked + label{
         background: rgba(255, 255, 255, 0.12);
         border-color: var(--color-grass);
     }
  
     /* rotatie fieldset als pijlen-grid */
-    fieldset:nth-of-type(3) {
+    fieldset:nth-of-type(4) {
         display: grid;
         grid-template-columns: repeat(3, 50px);
         grid-template-rows: repeat(3, 50px);
@@ -338,15 +462,18 @@
         padding: 0.75rem;
         place-content: center;
  
-        & label:nth-of-type(1) { grid-area: 2/1; }
-        & label:nth-of-type(2) { grid-area: 1/2; }
-        & label:nth-of-type(3) { grid-area: 2/2; }
-        & label:nth-of-type(4) { grid-area: 3/2; }
-        & label:nth-of-type(5) { grid-area: 2/3; }
+        & button:nth-of-type(1) { grid-area: 2/1; }
+        & button:nth-of-type(2) { grid-area: 1/2; }
+        & button:nth-of-type(3) { grid-area: 2/2; }
+        & button:nth-of-type(4) { grid-area: 3/2; }
+        & button:nth-of-type(5) { grid-area: 2/3; }
     }
- 
-    /* pijlknop styling */
-    .pijl {
+
+    button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -362,11 +489,11 @@
         cursor: pointer;
     }
  
-    label:hover .pijl {
+    button:hover {
         transform: scale(1.1);
     }
  
-    input[type="radio"]:checked + label .pijl {
+    button:focus {
         background: var(--color-grass);
         border-color: var(--color-grass-dark);
         color: var(--color-text);
@@ -374,12 +501,28 @@
             inset 2px 2px 0 var(--color-grass),
             inset -2px -2px 0 var(--color-grass-dark);
     }
+
+    /* disable fieldsets 2, 3, 4 als geen bloem geplant */
+    fieldset:nth-of-type(2),
+    fieldset:nth-of-type(3),
+    fieldset:nth-of-type(4) {
+        opacity: 0.4;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    html:has(#geplant:checked) fieldset:nth-of-type(2),
+    html:has(#geplant:checked) fieldset:nth-of-type(3),
+    html:has(#geplant:checked) fieldset:nth-of-type(4) {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
  
  
 /* THEMES - kleur en themawisselingen van de control panel */
 @layer themes {
- 
+
     /* bloem: blauw */
     html:has(#blauw:checked) cube {
         --f1-light-red: rgb(100, 149, 237);
@@ -407,17 +550,41 @@
     }
  
     html:has(#nacht:checked) body {
-        background-color: var(--color-sky);
+        background: linear-gradient(rgb(30, 50, 90) 0%, rgb(50, 70, 120) 45%, rgb(30, 60, 30) 60%, rgb(25, 55, 25) 60%, rgb(20, 45, 20) 100%);
+    }
+
+    html:has(#nacht:checked) main div.sun {
+        background: rgb(200, 200, 255);
+        box-shadow: rgba(200, 200, 255, 0.55) 0px 0px 60px 18px;
     }
  
-    /* regenboog thema */
-    html:has(#regenboog:checked) body {
-        background-image: linear-gradient(to right, red, orange, yellow, lime, cyan, blue, violet);
+    html:has(#regenboog:checked) .rainbow {
+        opacity: 0.4;
     }
- 
-    html:has(#regenboog:checked) legend {
-        --color-text: black;
+
+    html:has(#regenboog:checked) .rainbow div {
+        animation: fadeIn 0.3s ease forwards;
+        opacity: 0;
     }
+    html:has(#regenboog:checked) .rainbow .rood { background: rgb(255, 80, 80); }
+    html:has(#regenboog:checked) .rainbow .oranje { background: rgb(255, 160, 40); }
+    html:has(#regenboog:checked) .rainbow .geel { background: rgb(255, 220, 40); }
+    html:has(#regenboog:checked) .rainbow .groen { background: rgb(80, 200, 80); }
+    html:has(#regenboog:checked) .rainbow .blauw { background: rgb(60, 160, 220); }
+    html:has(#regenboog:checked) .rainbow .paars { background: rgb(120, 80, 200); }
+
+
+    html:has(#regenboog:checked) .rainbow .rood   { animation-delay: 1.4s; }
+    html:has(#regenboog:checked) .rainbow .oranje { animation-delay: 1.1s; }
+    html:has(#regenboog:checked) .rainbow .geel   { animation-delay: 0.8s; }
+    html:has(#regenboog:checked) .rainbow .groen  { animation-delay: 0.6s; }
+    html:has(#regenboog:checked) .rainbow .blauw  { animation-delay: 0.4s; }
+    html:has(#regenboog:checked) .rainbow .paars  { animation-delay: 0.2s; }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
 }
  
  
@@ -426,7 +593,6 @@
     @media (max-width: 600px) {
         body {
             grid-template-columns: 1fr;
-            grid-template-rows: 12rem auto 14rem;
         }
  
         aside {
