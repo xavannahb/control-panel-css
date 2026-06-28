@@ -171,13 +171,6 @@
         place-content: center;
 
         transition: 1.5s ease;
-        /* rotate: y 0deg;
-
-        html:has([value="nul"]:checked) & { rotate: y 0deg; }
-        html:has([value="links"]:checked) & { rotate: y 90deg; }
-        html:has([value="rechts"]:checked) & { rotate: y -90deg; }
-        html:has([value="omhoog"]:checked) & { rotate: x 90deg; }
-        html:has([value="omlaag"]:checked) & { rotate: x -90deg; } */
     }
 
     .flower {
@@ -566,13 +559,13 @@
         animation: fadeIn 0.3s ease forwards;
         opacity: 0;
     }
+    
     html:has(#regenboog:checked) .rainbow .rood { background: rgb(255, 80, 80); }
     html:has(#regenboog:checked) .rainbow .oranje { background: rgb(255, 160, 40); }
     html:has(#regenboog:checked) .rainbow .geel { background: rgb(255, 220, 40); }
     html:has(#regenboog:checked) .rainbow .groen { background: rgb(80, 200, 80); }
     html:has(#regenboog:checked) .rainbow .blauw { background: rgb(60, 160, 220); }
     html:has(#regenboog:checked) .rainbow .paars { background: rgb(120, 80, 200); }
-
 
     html:has(#regenboog:checked) .rainbow .rood   { animation-delay: 1.4s; }
     html:has(#regenboog:checked) .rainbow .oranje { animation-delay: 1.1s; }

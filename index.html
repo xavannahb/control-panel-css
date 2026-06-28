@@ -1172,30 +1172,30 @@
                 <label for="planten">Geen bloem</label>
     
                 <input type="radio" name="plant" value="geplant" id="geplant">
-                <label for="geplant">Plant bloem</label>
+                <label for="geplant">🌱 Plant bloem</label>
         </fieldset>
         <fieldset>
             <legend>Kleur Bloem</legend>
                 <input type="radio" name="bloem" value="rood" id="rood" checked>
-                <label for="rood">Rood</label>
+                <label for="rood">🌹 Rood</label>
     
                 <input type="radio" name="bloem" value="blauw" id="blauw">
-                <label for="blauw">Blauw</label>
+                <label for="blauw">🪻 Blauw</label>
 
                 <input type="radio" name="bloem" value="geel" id="geel">
-                <label for="geel">Geel</label>
+                <label for="geel">🌻 Geel</label>
         </fieldset>
 
         <fieldset>
             <legend>Themas</legend>
                 <input type="radio" name="tijd" id="dag" checked>
-                <label for="dag">Dag</label>
+                <label for="dag">🌤️ Dag</label>
 
                 <input type="radio" name="tijd" id="nacht">
-                <label for="nacht">Nacht</label>
+                <label for="nacht">🌓 Nacht</label>
 
                 <input type="radio" name="tijd" id="regenboog">
-                <label for="regenboog">Regenboog</label>
+                <label for="regenboog">🌈 Regenboog</label>
         </fieldset>
 
         <fieldset>
@@ -1208,7 +1208,8 @@
         </fieldset>
     </aside>
     <script>
-        const section = document.querySelector('section');
+        const section = document.querySelector('section'); 
+
         let rotateY = 0;
         let rotateX = 0;
         let rotateZ = 0;
@@ -1220,8 +1221,9 @@
         document.getElementById('links').addEventListener('click', () => { rotateY += 45; update(); });
         document.getElementById('rechts').addEventListener('click', () => { rotateY -= 45; update(); });
         document.getElementById('omhoog').addEventListener('click', () => { rotateZ += 45; update(); });
-        document.getElementById('omlaag').addEventListener('click', () => { rotateX -= 45; update(); });
+        document.getElementById('omlaag').addEventListener('click', () => { rotateZ -= 45; update(); });
         document.getElementById('nul').addEventListener('click', () => { rotateY = 0; rotateX = 0; rotateZ = 0;update(); });
+        // Bron: Jad voorbeeld in de workshops tijdens meesterschap
     </script>
 </body>
 </html>
