@@ -1209,7 +1209,7 @@
         </fieldset>
     </aside>
     <script>
-        // 
+        // Aside menu uitklappen
         const toggle = document.getElementById('aside-toggle');
         const aside = document.querySelector('aside');
 
@@ -1217,18 +1217,21 @@
             aside.classList.toggle('open');
         });
 
-        // 
-        const section = document.querySelector('section'); 
+        // Buttons rotatie 
+        const section = document.querySelector('section');  // haalt section op
 
-        let rotateY = 0;
+        // geeft waardes aan de rotates
+        let rotateY = 0; 
         let rotateX = 0;
         let rotateZ = 0;
 
+         // maakt dynamische rotate zodat de waardes vanuit de id kunnen opgehaalt worden
         function update() {
             section.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(${rotateZ}px)`;
         }
 
-        document.getElementById('links').addEventListener('click', () => { rotateY += 45; update(); });
+        // haalt de id op als er op geklikt wordt dan wordt de rotate aangesproken met de functie hierboven () zijn leeg omdat er geen extra event aan toegevoegd hoeft te worden? 
+        document.getElementById('links').addEventListener('click', () => { rotateY += 45; update(); }); 
         document.getElementById('rechts').addEventListener('click', () => { rotateY -= 45; update(); });
         document.getElementById('omhoog').addEventListener('click', () => { rotateZ += 45; update(); });
         document.getElementById('omlaag').addEventListener('click', () => { rotateZ -= 45; update(); });
