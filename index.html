@@ -1165,6 +1165,7 @@
     </main>
 
     <aside>
+        <button id="aside-toggle">☰</button>
         <h2>Plant hier je eigen bloem!</h2>
         <fieldset>
             <legend>Plant een bloem</legend>
@@ -1200,14 +1201,23 @@
 
         <fieldset>
             <legend>Rotatie</legend>
-            <button id="links">&#9664;</button>
-            <button id="omhoog">&#9650;</button>
-            <button id="nul">0</button>
-            <button id="omlaag">&#9660;</button>
-            <button id="rechts">&#9654;</button>
+            <button class="knop" id="links">&#9664;</button>
+            <button class="knop" id="omhoog">&#9650;</button>
+            <button class="knop" id="nul">0</button>
+            <button class="knop" id="omlaag">&#9660;</button>
+            <button  class="knop" id="rechts">&#9654;</button>
         </fieldset>
     </aside>
     <script>
+        // 
+        const toggle = document.getElementById('aside-toggle');
+        const aside = document.querySelector('aside');
+
+        toggle.addEventListener('click', () => {
+            aside.classList.toggle('open');
+        });
+
+        // 
         const section = document.querySelector('section'); 
 
         let rotateY = 0;
