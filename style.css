@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'minecraft-font';
-    src: url('../fonts/minecraft.ttf'); 
+    src: url('fonts/minecraft.ttf'); 
 }
 
 /* BRON: Voor de uitleg en indeling van de @layers:  https://css-tricks.com/css-cascade-layers/ */
